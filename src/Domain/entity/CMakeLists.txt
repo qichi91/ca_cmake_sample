@@ -1,10 +1,10 @@
 cmake_minimum_required(VERSION 3.11.0)
 
 project(
-    test_values
+    domain_entity
     VERSION 0.0.0
     DESCRIPTION
-        "Test : Value Objects"
+        "Entity Objects"
     LANGUAGES CXX
 )
 
@@ -13,17 +13,20 @@ add_library(${PROJECT_NAME} OBJECT)
 
 # add sources to the library target
 target_sources(${PROJECT_NAME} PRIVATE
-# CHECK::ここにテストケースのソースファイルを追加
-unittest_values.cpp
-unittest_entity.cpp
+# CHECK::ここにソースを追加
+User.cpp
 )
 
 # define the C++ standard needed to compile this library and make it visible to dependers
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_11)
 
+
 target_include_directories(${PROJECT_NAME} PRIVATE
-# CHECK::ここにテストケースで使用するソースのヘッダーを追加
 ${CMAKE_SOURCE_DIR}/src/Domain/values
-${CMAKE_SOURCE_DIR}/src/Domain/entity
-${CMAKE_SOURCE_DIR}/test/include/Catch2
 )
+# # set the include directories
+# target_include_directories(
+#     ${PROJECT_NAME}
+#     PRIVATE ./
+#     # PUBLIC include
+# )

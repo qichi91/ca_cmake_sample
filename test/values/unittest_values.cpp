@@ -1,6 +1,4 @@
-#define CATCH_CONFIG_MAIN //! main()はCatch2が作ってくれる
-#include <catch.hpp>      //! 環境に合わせて
-#include <memory>         //! make_unique
+#include <catch.hpp>
 
 #include "IntValue.hpp"
 #include "StringValue.hpp"
@@ -23,6 +21,9 @@ TEST_CASE("IntValues", "")
         REQUIRE(p1 != p2);
         REQUIRE(*p1 == *p2);
         REQUIRE(*p1 != *p3);
+
+        REQUIRE(*p1 != *p3->clone());
+        REQUIRE(*p3 == *p3->clone());
     }
 
     SECTION("異常系")
@@ -58,6 +59,9 @@ TEST_CASE("StringValues", "")
         REQUIRE(p1 != p2);
         REQUIRE(*p1 == *p2);
         REQUIRE(*p1 != *p3);
+
+        REQUIRE(*p1 != *p3->clone());
+        REQUIRE(*p3 == *p3->clone());
     }
 
     SECTION("異常系")
@@ -83,6 +87,9 @@ TEST_CASE("TypeNameValue", "")
         REQUIRE(p1 != p2);
         REQUIRE(*p1 == *p2);
         REQUIRE(*p1 != *p3);
+
+        REQUIRE(*p1 != *p3->clone());
+        REQUIRE(*p3 == *p3->clone());
     }
 
     SECTION("異常系")
@@ -125,6 +132,9 @@ TEST_CASE("ThreeOctalDigitsValue", "")
         REQUIRE(p1 != p2);
         REQUIRE(*p1 == *p2);
         REQUIRE(*p1 != *p3);
+
+        REQUIRE(*p1 != *p3->clone());
+        REQUIRE(*p3 == *p3->clone());
     }
 
     SECTION("異常系")

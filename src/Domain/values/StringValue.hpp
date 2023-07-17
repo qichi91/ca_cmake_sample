@@ -13,13 +13,11 @@ public:
     explicit StringValue(std::string value);
     virtual ~StringValue() = default;
     std::string getValue() const;
-
-    //! 等価演算子
-    bool operator==(const StringValue& other) const;
-    bool operator!=(const StringValue& other) const;
+    virtual std::unique_ptr<ValueObject> clone() const override;
+    virtual bool compare(const ValueObject &other) const override;
 
 protected:
-    bool validation() override;
+    virtual bool validation() const override;
 
 private:
     std::string m_value;

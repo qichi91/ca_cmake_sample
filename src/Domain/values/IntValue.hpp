@@ -12,13 +12,11 @@ public:
     explicit IntValue(int value);
     virtual ~IntValue() = default;
     int getValue() const;
-
-    //! 等価演算子
-    bool operator==(const IntValue& other) const;
-    bool operator!=(const IntValue& other) const;
+    virtual std::unique_ptr<ValueObject> clone() const override;
+    virtual bool compare(const ValueObject &other) const override;
 
 protected:
-    bool validation() override;
+    virtual bool validation() const override;
 
 private:
     int m_value;

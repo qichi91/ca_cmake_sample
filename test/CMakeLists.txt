@@ -17,8 +17,13 @@ add_subdirectory(values)
 # set(EXECUTABLE_OUTPUT_PATH bin)
 # テストケースの実行バイナリ
 add_executable(${PROJECT_NAME})
-# テストするオブジェクトライブラリを追加する
+target_sources(${PROJECT_NAME} PRIVATE main.cpp)
+target_include_directories(${PROJECT_NAME} PRIVATE
+${CMAKE_SOURCE_DIR}/test/include/Catch2
+)
 target_link_libraries(${PROJECT_NAME} PRIVATE
+# CHECK::ここにテストケースで使用する依存オブジェクトライブラリを追加
 test_values
 domain_values
+domain_entity
 )

@@ -14,14 +14,26 @@ int IntValue::getValue() const
     return m_value;
 }
 
-bool IntValue::operator==(const IntValue &other) const
+std::unique_ptr<ValueObject> IntValue::clone() const
 {
-    return this->m_value == other.getValue();
+    return std::make_unique<IntValue>(this->getValue());
 }
 
-bool IntValue::operator!=(const IntValue &other) const
+/**
+ * @brief オブジェクトの比較
+ * 
+ * @param other 
+ * @return true 
+ * @return false 
+ */
+bool IntValue::compare(const ValueObject &other) const
 {
-    return this->m_value != other.getValue();
+    const auto target = dynamic_cast<const IntValue *>(&other);
+    if (target == nullptr)
+    {
+        return false;
+    }
+    return this->m_value == target->getValue();
 }
 
 /**
@@ -30,14 +42,11 @@ bool IntValue::operator!=(const IntValue &other) const
  * @return true
  * @return false
  */
-bool IntValue::validation()
+bool IntValue::validation() const
 {
     if (INT32_MIN <= m_value && m_value <= INT32_MAX)
     {
         return true;
     }
-    else
-    {
-        return false;
-    }
+    return false;
 }

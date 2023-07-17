@@ -12,13 +12,11 @@ public:
     explicit ThreeOctalDigitsValue(std::string value);
     virtual ~ThreeOctalDigitsValue() = default;
     std::string getValue() const;
-
-    //! 等価演算子
-    bool operator==(const ThreeOctalDigitsValue& other) const;
-    bool operator!=(const ThreeOctalDigitsValue& other) const;
+    virtual std::unique_ptr<ValueObject> clone() const override;
+    virtual bool compare(const ValueObject &other) const override;
 
 protected:
-    bool validation() override;
+    virtual bool validation() const override;
 
 private:
     std::string m_value;

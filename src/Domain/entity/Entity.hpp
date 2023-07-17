@@ -1,21 +1,16 @@
 #pragma once
 
-#include <memory>
 #include <stdexcept>
 
-/**
- * @brief 値オブジェクトの基底クラス
- * 値オブジェクトで共通の処理を実装する
- */
-class ValueObject
+class Entity
 {
 public:
     /**
      * @brief コピーコンストラクタは禁止
      *
-     * @return ValueObject&
+     * @return Entity&
      */
-    ValueObject &operator=(const ValueObject &) = delete;
+    Entity &operator=(const Entity &) = delete;
 
     /**
      * @brief 等価演算
@@ -24,7 +19,7 @@ public:
      * @return true
      * @return false
      */
-    bool operator==(const ValueObject &other) const
+    bool operator==(const Entity &other) const
     {
         return compare(other);
     }
@@ -35,30 +30,30 @@ public:
      * @return true
      * @return false
      */
-    bool operator!=(const ValueObject &other) const
+    bool operator!=(const Entity &other) const
     {
         return !compare(other);
     }
 
     /**
-     * @brief 値オブジェクトの比較
+     * @brief エンティティオブジェクトのクローン
+     * 
+     * @return std::unique_ptr<Entity> 
+     */
+    virtual std::unique_ptr<Entity> clone() const = 0;
+
+    /**
+     * @brief エンティティオブジェクトの比較
      *
-     * @param other 比較対象の値オブジェクト
+     * @param other 比較対象のエンティティオブジェクト
      * @return true 一致
      * @return false 不一致
      */
-    virtual bool compare(const ValueObject &other) const = 0;
-
-    /**
-     * @brief 値オブジェクトのクローン
-     * 
-     * @return std::unique_ptr<ValueObject> 
-     */
-    virtual std::unique_ptr<ValueObject> clone() const = 0;
+    virtual bool compare(const Entity &other) const = 0;
 
 protected:
     /**
-     * @brief 値オブジェクトの検証
+     * @brief エンティティオブジェクトの検証
      * サブクラスのコンストラクタで必ず呼び出し、完全コンストラクタを実現する
      *
      * @return true

@@ -4,7 +4,7 @@
 
 /**
  * @brief 型名の値オブジェクト
- * 
+ *
  */
 class TypeNameValue : public ValueObject
 {
@@ -12,13 +12,11 @@ public:
     explicit TypeNameValue(std::string value);
     virtual ~TypeNameValue() = default;
     std::string getValue() const;
-
-    //! 等価演算子
-    bool operator==(const TypeNameValue& other) const;
-    bool operator!=(const TypeNameValue& other) const;
+    virtual std::unique_ptr<ValueObject> clone() const override;
+    virtual bool compare(const ValueObject &other) const override;
 
 protected:
-    bool validation() override;
+    virtual bool validation() const override;
 
 private:
     std::string m_value;

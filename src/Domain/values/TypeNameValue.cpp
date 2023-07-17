@@ -16,14 +16,26 @@ std::string TypeNameValue::getValue() const
     return m_value;
 }
 
-bool TypeNameValue::operator==(const TypeNameValue &other) const
+std::unique_ptr<ValueObject> TypeNameValue::clone() const
 {
-    return this->m_value == other.getValue();
+    return std::make_unique<TypeNameValue>(this->getValue());
 }
 
-bool TypeNameValue::operator!=(const TypeNameValue &other) const
+/**
+ * @brief オブジェクトの比較
+ * 
+ * @param other 
+ * @return true 
+ * @return false 
+ */
+bool TypeNameValue::compare(const ValueObject &other) const
 {
-    return this->m_value != other.getValue();
+    const auto target = dynamic_cast<const TypeNameValue *>(&other);
+    if (target == nullptr)
+    {
+        return false;
+    }
+    return this->m_value == target->getValue();
 }
 
 /**
@@ -33,7 +45,7 @@ bool TypeNameValue::operator!=(const TypeNameValue &other) const
  * @return true
  * @return false
  */
-bool TypeNameValue::validation()
+bool TypeNameValue::validation() const
 {
     std::regex re("^[a-z]{2}[0-9]{3}[A-Z]{4}$");
     if (std::regex_match(m_value, re))

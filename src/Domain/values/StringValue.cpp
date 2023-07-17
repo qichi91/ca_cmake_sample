@@ -14,14 +14,26 @@ std::string StringValue::getValue() const
     return m_value;
 }
 
-bool StringValue::operator==(const StringValue &other) const
+std::unique_ptr<ValueObject> StringValue::clone() const
 {
-    return this->m_value == other.getValue();
+    return std::make_unique<StringValue>(this->getValue());
 }
 
-bool StringValue::operator!=(const StringValue &other) const
+/**
+ * @brief オブジェクトの比較
+ * 
+ * @param other 
+ * @return true 
+ * @return false 
+ */
+bool StringValue::compare(const ValueObject &other) const
 {
-    return this->m_value != other.getValue();
+    const auto target = dynamic_cast<const StringValue *>(&other);
+    if (target == nullptr)
+    {
+        return false;
+    }
+    return this->m_value == target->getValue();
 }
 
 /**
@@ -30,7 +42,7 @@ bool StringValue::operator!=(const StringValue &other) const
  * @return true
  * @return false
  */
-bool StringValue::validation()
+bool StringValue::validation() const
 {
     return 0 < m_value.size();
 }

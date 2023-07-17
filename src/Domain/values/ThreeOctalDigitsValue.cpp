@@ -15,14 +15,26 @@ std::string ThreeOctalDigitsValue::getValue() const
     return m_value;
 }
 
-bool ThreeOctalDigitsValue::operator==(const ThreeOctalDigitsValue &other) const
+std::unique_ptr<ValueObject> ThreeOctalDigitsValue::clone() const
 {
-    return this->m_value == other.getValue();
+    return std::make_unique<ThreeOctalDigitsValue>(this->getValue());
 }
 
-bool ThreeOctalDigitsValue::operator!=(const ThreeOctalDigitsValue &other) const
+/**
+ * @brief オブジェクトの比較
+ * 
+ * @param other 
+ * @return true 
+ * @return false 
+ */
+bool ThreeOctalDigitsValue::compare(const ValueObject &other) const
 {
-    return this->m_value != other.getValue();
+    const auto target = dynamic_cast<const ThreeOctalDigitsValue *>(&other);
+    if (target == nullptr)
+    {
+        return false;
+    }
+    return this->m_value == target->getValue();
 }
 
 /**
@@ -32,7 +44,7 @@ bool ThreeOctalDigitsValue::operator!=(const ThreeOctalDigitsValue &other) const
  * @return true
  * @return false
  */
-bool ThreeOctalDigitsValue::validation()
+bool ThreeOctalDigitsValue::validation() const
 {
     std::regex re("^[0-7]{3}$");
     if (std::regex_match(m_value, re))

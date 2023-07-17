@@ -13,6 +13,7 @@ add_library(${PROJECT_NAME} OBJECT)
 
 # add sources to the library target
 target_sources(${PROJECT_NAME} PRIVATE
+# CHECK::ここにソースを追加
 IntValue.cpp
 StringValue.cpp
 TypeNameValue.cpp
