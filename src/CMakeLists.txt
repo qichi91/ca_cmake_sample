@@ -19,8 +19,7 @@ target_sources(${PROJECT_NAME} PRIVATE main.cpp)
 # libraries are described in the subdirectories
 target_link_libraries(${PROJECT_NAME} PRIVATE
 # ここに依存ライブラリ(=サブディレクトリ)を追加
-domain_values
-domain_entity
+$<TARGET_OBJECTS:domain>
 )
 
 # make installの出力先

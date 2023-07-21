@@ -5,9 +5,13 @@
 #include "IntValue.hpp"
 #include "TypeNameValue.hpp"
 
+class IntValue;
+class TypeNameValue;
+
 class User : public Entity
 {
 public:
+    // User(std::unique_ptr<IntValue> id, std::unique_ptr<TypeNameValue> name);
     User(int id, std::string name);
     virtual ~User() = default;
     virtual std::unique_ptr<Entity> clone() const override;

@@ -15,7 +15,6 @@ add_library(${PROJECT_NAME} OBJECT)
 target_sources(${PROJECT_NAME} PRIVATE
 # CHECK::ここにソースを追加
 IntValue.cpp
-StringValue.cpp
 TypeNameValue.cpp
 ThreeOctalDigitsValue.cpp
 )
@@ -23,9 +22,9 @@ ThreeOctalDigitsValue.cpp
 # define the C++ standard needed to compile this library and make it visible to dependers
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_11)
 
-# # set the include directories
-# target_include_directories(
-#     ${PROJECT_NAME}
-#     PRIVATE ./
-#     # PUBLIC include
-# )
+# set the include directories
+target_include_directories(
+    ${PROJECT_NAME}
+    PRIVATE ./
+    # PUBLIC include
+)

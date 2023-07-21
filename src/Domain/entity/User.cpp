@@ -1,5 +1,17 @@
 #include "User.hpp"
 
+#include "IntValue.hpp"
+#include "TypeNameValue.hpp"
+
+// User::User(std::unique_ptr<IntValue> id, std::unique_ptr<TypeNameValue> name)
+//     : m_id(std::move(id)), m_name(std::move(name))
+// {
+//     if (!validation())
+//     {
+//         throw std::invalid_argument("invalid argument : User");
+//     }
+// }
+
 User::User(int id, std::string name)
     : m_id(std::make_unique<IntValue>(id)), m_name(std::make_unique<TypeNameValue>(name))
 {

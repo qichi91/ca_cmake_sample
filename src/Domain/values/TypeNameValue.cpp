@@ -3,39 +3,12 @@
 #include "TypeNameValue.hpp"
 
 TypeNameValue::TypeNameValue(std::string value)
-    : m_value(value)
+    : StringValue(value)
 {
     if (!validation())
     {
         throw std::invalid_argument("invalid argument : TypeNameValue");
     }
-}
-
-std::string TypeNameValue::getValue() const
-{
-    return m_value;
-}
-
-std::unique_ptr<ValueObject> TypeNameValue::clone() const
-{
-    return std::make_unique<TypeNameValue>(this->getValue());
-}
-
-/**
- * @brief オブジェクトの比較
- * 
- * @param other 
- * @return true 
- * @return false 
- */
-bool TypeNameValue::compare(const ValueObject &other) const
-{
-    const auto target = dynamic_cast<const TypeNameValue *>(&other);
-    if (target == nullptr)
-    {
-        return false;
-    }
-    return this->m_value == target->getValue();
 }
 
 /**

@@ -12,8 +12,6 @@ public:
     explicit IntValue(int value);
     virtual ~IntValue() = default;
     int getValue() const;
-    virtual std::unique_ptr<ValueObject> clone() const override;
-    virtual bool compare(const ValueObject &other) const override;
 
 protected:
     virtual bool validation() const override;

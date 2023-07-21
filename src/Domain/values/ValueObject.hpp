@@ -51,8 +51,8 @@ public:
 
     /**
      * @brief 値オブジェクトのクローン
-     * 
-     * @return std::unique_ptr<ValueObject> 
+     *
+     * @return std::unique_ptr<ValueObject>
      */
     virtual std::unique_ptr<ValueObject> clone() const = 0;
 

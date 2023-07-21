@@ -20,13 +20,9 @@ User.cpp
 # define the C++ standard needed to compile this library and make it visible to dependers
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_11)
 
-
-target_include_directories(${PROJECT_NAME} PRIVATE
-${CMAKE_SOURCE_DIR}/src/Domain/values
+# set the include directories
+target_include_directories(
+    ${PROJECT_NAME}
+    PRIVATE ./ ../values
+    # PUBLIC include
 )
-# # set the include directories
-# target_include_directories(
-#     ${PROJECT_NAME}
-#     PRIVATE ./
-#     # PUBLIC include
-# )

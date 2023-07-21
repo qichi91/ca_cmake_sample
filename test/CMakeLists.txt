@@ -24,6 +24,5 @@ ${CMAKE_SOURCE_DIR}/test/include/Catch2
 target_link_libraries(${PROJECT_NAME} PRIVATE
 # CHECK::ここにテストケースで使用する依存オブジェクトライブラリを追加
 test_values
-domain_values
-domain_entity
+$<TARGET_OBJECTS:domain>
 )
