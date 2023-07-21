@@ -1,27 +1,34 @@
-cmake_minimum_required(VERSION 3.11.0)
+cmake_minimum_required(VERSION 3.13.0)
 
+# projectは実行ファイルを作成するときにだけ設定する
 project(cmaketest2
-        VERSION 0.1.0
-        DESCRIPTION
-            "..."
-        LANGUAGES C CXX)
+    VERSION 0.1.0
+    DESCRIPTION
+    "..."
+    LANGUAGES C CXX)
+
+# サブディレクトリ全体をコンパイルしたオブジェクトライブラリを定義
+add_library(srcCompileObjects OBJECT "")
+# include pathの設定
+target_include_directories(
+    srcCompileObjects
+    PRIVATE
+    "${CMAKE_CURRENT_SOURCE_DIR}/include")
 
 # CHECK::ここにサブディレクトリを追加
-add_subdirectory(Domain)
+add_subdirectory(domain)
 
-# 実行バイリの出力先
-# set(EXECUTABLE_OUTPUT_PATH bin)
-# add an example executable
+# 実行バイリの出力先(build/{project src path}/output)
+set(EXECUTABLE_OUTPUT_PATH output)
+
+# 実行ファイルの作成
 add_executable(${PROJECT_NAME})
-# add sources to the example executable
+
+# 実行ファイルにソースを追加
 target_sources(${PROJECT_NAME} PRIVATE main.cpp)
-# link libraries "hello" and "hello_header_only" to the example executable the
-# libraries are described in the subdirectories
-target_link_libraries(${PROJECT_NAME} PRIVATE
-# ここに依存ライブラリ(=サブディレクトリ)を追加
-domain_values
-domain_entity
-)
+
+# 実行ファイルにコンパイル済みオブジェクトライブラリを追加
+target_link_libraries(${PROJECT_NAME} PRIVATE srcCompileObjects)
 
 # make installの出力先
-# install(TARGETS ${PROJECT_NAME} DESTINATION /app)
+install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION release)
