@@ -1,5 +1,8 @@
 #include "User.hpp"
 
+#include "IntValue.hpp"
+#include "TypeNameValue.hpp"
+
 User::User(int id, std::string name)
     : m_id(std::make_unique<IntValue>(id)), m_name(std::make_unique<TypeNameValue>(name))
 {

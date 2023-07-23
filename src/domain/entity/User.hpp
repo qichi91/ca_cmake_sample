@@ -2,8 +2,9 @@
 
 #include <memory>
 #include "Entity.hpp"
-#include "IntValue.hpp"
-#include "TypeNameValue.hpp"
+
+class IntValue;
+class TypeNameValue;
 
 class User : public Entity
 {

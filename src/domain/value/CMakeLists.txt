@@ -7,7 +7,7 @@ target_sources(srcCompileObjects PRIVATE
     "${CMAKE_CURRENT_SOURCE_DIR}/IntValue.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/StringValue.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/TypeNameValue.cpp"
-    # "${CMAKE_CURRENT_SOURCE_DIR}/ThreeOctalDigitsValue.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/ThreeOctalDigitsValue.cpp"
 )
 
 # テスト対象の場合はPUBLICにする

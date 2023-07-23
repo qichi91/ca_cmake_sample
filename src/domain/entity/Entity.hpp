@@ -6,11 +6,12 @@ class Entity
 {
 public:
     /**
-     * @brief コピーコンストラクタは禁止
+     * @brief 代入演算子は禁止
      *
      * @return Entity&
      */
     Entity &operator=(const Entity &) = delete;
+    Entity &operator=(Entity &) = delete;
 
     /**
      * @brief 等価演算
