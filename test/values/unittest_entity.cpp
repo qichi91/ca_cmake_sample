@@ -26,6 +26,17 @@ TEMPLATE_TEST_CASE("User", "[Entity][template]", User)
 
         REQUIRE(*p1 != *p3->clone());
         REQUIRE(*p3 == *p3->clone());
+
+        auto id = p1->getId();
+        auto name = p1->getName();
+        REQUIRE(id->getValue() == 53);
+        REQUIRE(name->getValue() == "ab987OKIJ");
+
+        {
+            auto p5 = TestType(53, "ab987OKIJ");
+            REQUIRE(p5.getId()->getValue() == 53);
+            REQUIRE(p5.getName()->getValue() == "ab987OKIJ");            
+        }
     }
 
     SECTION("異常系")
