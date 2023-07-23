@@ -5,8 +5,11 @@
  * @brief IntValueのテスト
  * 
  */
+
+#include "IntValue.hpp"
+#include "TypeNameValue.hpp"
 #include "User.hpp"
-TEMPLATE_TEST_CASE("User", "[ValueObject][template]", User)
+TEMPLATE_TEST_CASE("User", "[Entity][template]", User)
 {
     SECTION("正常系")
     {
@@ -26,6 +29,11 @@ TEMPLATE_TEST_CASE("User", "[ValueObject][template]", User)
 
         REQUIRE(*p1 != *p3->clone());
         REQUIRE(*p3 == *p3->clone());
+
+        auto id = p1->getId();
+        auto name = p1->getName();
+        REQUIRE(id->getValue() == 53);
+        REQUIRE(name->getValue() == "ab987OKIJ");
     }
 
     SECTION("異常系")
